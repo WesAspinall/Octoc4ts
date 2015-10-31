@@ -3,13 +3,6 @@
 > I am your Readme.md file, you should probably update me.
 
 
-## Usage
-
-- Clone this repo
-- Run `npm install` to install all necessary dependencies
-- Run `gulp start` to start the server and a handful of other tasks
-
-
 ## Assets Installed By Default
 
 - [Normalize CSS](https://necolas.github.io/normalize.css/)

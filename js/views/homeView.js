@@ -1,23 +1,14 @@
 import React from 'react';
-
 export default React.createClass({
 
-  formClickHandler() {
-    this.props.onFormClick();
-  },
-
-  spinClickHandler() {
-    this.props.onSpinClick();
-  },
+homePhotos(data) {
+  return <li key={data.objectId} onClick={() => this.props.onItemClick(data.objectId)}>{data.Img}</li>;
+}
 
   render() {
-    return (
-      <div>
-        <h1>Home</h1>
-        <button onClick={this.formClickHandler}>Go to form</button>
-        <button onClick={this.spinClickHandler}>Spin to win</button>
-      </div>
-    );
+    return <ul>{this.props.collectionData.map(this.homePhotos)}</ul>;
   }
 
-});
+    
+  }
+}); 
