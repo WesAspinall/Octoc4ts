@@ -8,9 +8,16 @@ clickHandler(event) {
     this.props.onSelect(this.props.objectId);
   },
 
+ addClickHandler() {
+    this.props.onAddClick();
+  },
+
   getPhoto(data) {
     return (
-      <div key={data.objectId} className="photoContainer" onClick={() => this.detailsClickHandler(data.objectId)}>
+      <div key={data.objectId} className="photoContainer" 
+        onClick={() => 
+        this.ClickHandler(data.objectId)}>
+
         <img src={data.Img} className="photoHome"/>
       </div>
     ); 
@@ -18,11 +25,19 @@ clickHandler(event) {
 
   render() {
     return (
-      <div>
-        {this.props.photos().map(this.getPhoto)}
-        <button onClick={''}>Add</button>
+      <div className="outer">
+        <div className="main-header">
+          <h2>Pictures</h2>
+          <div className="main-button">
+            <button className="main-add" onClick={this.addClickHandler}>Add Picture</button>
+          </div>          
+        </div>
+
+      <div className="thumbnail-list">
+        {this.props.data.map(this.getPhoto)}
       </div>
+
+     </div>
     );
-    
   }
 }); 

@@ -2,19 +2,23 @@ import Backbone from 'backbone';
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import HomeComponent from './views/homeView';
-
-
-const RECORD = {message: "All the things!"};
+import PhotoComponent from './views/photo';
+import PhotoCollection from './resources/photo_collection';
+import PhotoModel from './resources/photo_model';
 
 export default Backbone.Router.extend({
 
   routes: {
-    ""      : "showHome",
+    ""      : "Home",
   },
 
-  initialize(appElement) {
+
+
+initialize(appElement) {
     this.el = appElement;
+    this.collection = new PhotoCollection();
+    this.model = new PhotoModel();
+
   },
 
   goto(route) {
@@ -27,16 +31,25 @@ export default Backbone.Router.extend({
     ReactDom.render(component, this.el);
   },
 
+    Home() {
+    this.collection.fetch().then(() => {
+      this.render(
+        <PhotoComponent          
+          onDetailsClick={(id) => this.goto('detail/' + id)}
+          onAddClick={() => this.goto('add')}
+          pictures={() => this.collection.toJSON()}
+        />
+      );
+    });
+  },
+     
+
   start() {
     Backbone.history.start();
     return this;
   },
 
   
-  showHome() {
-    this.render(<HomeComponent/>);
-  },
-
 
 });
 

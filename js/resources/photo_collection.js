@@ -1,10 +1,10 @@
 import Backbone from 'backbone';
 import PhotoModel from './photo_model';
+import {APP_URL} from '../parse_data';
 
 let PhotoCollection = Backbone.Collection.extend({
 
-  url: 'https://api.parse.com/1/classes/rollsroyce',
-
+  url: APP_URL,
   model: PhotoModel,
 
   parse: function(data) {

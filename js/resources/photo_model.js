@@ -1,11 +1,15 @@
-import Backbone from 'Backbone';
+import Backbone from 'backbone';
+import {APP_URL} from '../parse_data';
 
-let PhotoModel = Backbone.Model.extend({
+export default Backbone.Model.extend({
 
-  urlRoot: 'https://api.parse.com/1/classes/rollsroyce',
+  urlRoot: APP_URL,
 
-  idAttribute: 'objectId'
+  idAttribute: 'objectId',
+
+  templateData() {
+    let data = this.toJSON();
+    return data;
+  }
 
 });
-
-export default PhotoModel;
