@@ -10,3 +10,7 @@ let PhotoCollection = Backbone.Collection.extend({
   parse: function(data) {
     return data.results;
   }
+
+});
+
+export default PhotoCollection;

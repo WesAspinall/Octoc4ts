@@ -1,12 +1,20 @@
 import Backbone from 'backbone';
 import React from 'react';
 import ReactDom from 'react-dom';
+
 import HomeComponent from './views/homeView';
+
+
+const RECORD = {message: "All the things!"};
 
 export default Backbone.Router.extend({
 
   routes: {
-    ""      : "showHome"
+    ""      : "showHome",
+  },
+
+  initialize(appElement) {
+    this.el = appElement;
   },
 
   goto(route) {
@@ -15,21 +23,20 @@ export default Backbone.Router.extend({
     });
   },
 
- render(HomeComponent) {
-    ReactDom.render(HomeComponent, this.el);
+  render(component) {
+    ReactDom.render(component, this.el);
   },
 
-    start() {
+  start() {
     Backbone.history.start();
     return this;
   },
 
+  
   showHome() {
-    this.render(
-      <HomeComponent
-       onFormClick={() => 
-        this.goto('form')}/>
-    );
-  }
+    this.render(<HomeComponent/>);
+  },
+
 
 });
+

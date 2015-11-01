@@ -1,14 +1,20 @@
+// this.props = {
+//   data: the arra of image objects [ ... ]
+//   onThumbnailSelect: the function we were given
+// }
+
 import React from 'react';
+import Photo from './photo';
+
 export default React.createClass({
 
-homePhotos(data) {
-  return <li key={data.objectId} onClick={() => this.props.onItemClick(data.objectId)}>{data.Img}</li>;
-}
 
   render() {
-    return <ul>{this.props.collectionData.map(this.homePhotos)}</ul>;
+    return (
+      <div className="photo-list">
+      <span>sdasdf</span>;
+      </div>
+    );
   }
 
-    
-  }
 }); 
