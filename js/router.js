@@ -1,25 +1,27 @@
 import Backbone from 'backbone';
 import React from 'react';
 import ReactDom from 'react-dom';
+import $ from 'jquery';
 
-import PhotoComponent from './views/photo';
-import PhotoCollection from './resources/photo_collection';
-import PhotoModel from './resources/photo_model';
+import PhotoModel from './resources/photoModel';
+import PhotoCollection from './resources/photoCollection';
+
+
+import HomeComponent from './views/homeView';
 
 export default Backbone.Router.extend({
 
-  routes: {
-    ""      : "Home",
+    routes: {
+    ''             : "redirectToHome",
+    "Home"         : "homePage",
   },
-
-
 
 initialize(appElement) {
+
     this.el = appElement;
     this.collection = new PhotoCollection();
-    this.model = new PhotoModel();
 
-  },
+},
 
   goto(route) {
     this.navigate(route, {
@@ -27,29 +29,36 @@ initialize(appElement) {
     });
   },
 
-  render(component) {
-    ReactDom.render(component, this.el);
-  },
+render(component){
+  ReactDom.render(component, this.el);
+},
 
-    Home() {
-    this.collection.fetch().then(() => {
-      this.render(
-        <PhotoComponent          
-          onDetailsClick={(id) => this.goto('detail/' + id)}
-          onAddClick={() => this.goto('add')}
-          pictures={() => this.collection.toJSON()}
-        />
+redirectToHome() {
+  this.navigate('Home',{
+    replace: true,
+    trigger: true
+  })
+},
+
+
+  homePage(){
+
+    this.collection.fetch().then(() =>{
+
+    this.render(
+      <HomeComponent
+      photos={this.collection.toJSON()}/>
       );
-    });
+   });
   },
-     
 
-  start() {
+
+start() {
     Backbone.history.start();
     return this;
   },
 
-  
-
 });
+
+
 

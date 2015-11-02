@@ -35,9 +35,9 @@ var _router = require('./router');
 
 var _router2 = _interopRequireDefault(_router);
 
-var element = document.querySelector('.app');
+var appElement = document.querySelector('.app');
 
-new _router2['default'](element).start();
+new _router2['default'](appElement).start();
 
 },{"./ajax_setup":1,"./router":6,"react":167,"react-dom":11}],3:[function(require,module,exports){
 'use strict';
@@ -45,9 +45,9 @@ new _router2['default'](element).start();
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var APP_ID = '38hg24cgj01qgYtl6xswBAwxrF560klWTBm5ODly';
-var API_KEY = 'pcbwTKiAjTXPWNXd1GyrS5MqopYVuXlZ1L5axp6q';
-var APP_URL = 'https://api.parse.com/1/classes/rollsroyce';
+var APP_ID = 'R5am1ZD46HujS0DLDYruGSPLvHtvoRs3eR0X701B';
+var API_KEY = 'dhjVfFIeOu0U8trp6eKnQJYYWlIJOI3OsUrUFC6e';
+var APP_URL = 'https://api.parse.com/1/classes/photos';
 
 exports.APP_ID = APP_ID;
 exports.API_KEY = API_KEY;
@@ -66,27 +66,26 @@ var _backbone = require('backbone');
 
 var _backbone2 = _interopRequireDefault(_backbone);
 
-var _photo_model = require('./photo_model');
+var _photoModel = require('./photoModel');
 
-var _photo_model2 = _interopRequireDefault(_photo_model);
+var _photoModel2 = _interopRequireDefault(_photoModel);
 
 var _parse_data = require('../parse_data');
 
-var PhotoCollection = _backbone2['default'].Collection.extend({
+exports['default'] = _backbone2['default'].Collection.extend({
 
   url: _parse_data.APP_URL,
-  model: _photo_model2['default'],
+
+  model: _photoModel2['default'],
 
   parse: function parse(data) {
     return data.results;
   }
 
 });
-
-exports['default'] = PhotoCollection;
 module.exports = exports['default'];
 
-},{"../parse_data":3,"./photo_model":5,"backbone":8}],5:[function(require,module,exports){
+},{"../parse_data":3,"./photoModel":5,"backbone":8}],5:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -101,7 +100,7 @@ var _backbone2 = _interopRequireDefault(_backbone);
 
 var _parse_data = require('../parse_data');
 
-exports['default'] = _backbone2['default'].Model.extend({
+var PhotoModel = _backbone2['default'].Model.extend({
 
   urlRoot: _parse_data.APP_URL,
 
@@ -111,8 +110,9 @@ exports['default'] = _backbone2['default'].Model.extend({
     var data = this.toJSON();
     return data;
   }
-
 });
+
+exports['default'] = PhotoModel;
 module.exports = exports['default'];
 
 },{"../parse_data":3,"backbone":8}],6:[function(require,module,exports){
@@ -136,28 +136,33 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _viewsPhoto = require('./views/photo');
+var _jquery = require('jquery');
 
-var _viewsPhoto2 = _interopRequireDefault(_viewsPhoto);
+var _jquery2 = _interopRequireDefault(_jquery);
 
-var _resourcesPhoto_collection = require('./resources/photo_collection');
+var _resourcesPhotoModel = require('./resources/photoModel');
 
-var _resourcesPhoto_collection2 = _interopRequireDefault(_resourcesPhoto_collection);
+var _resourcesPhotoModel2 = _interopRequireDefault(_resourcesPhotoModel);
 
-var _resourcesPhoto_model = require('./resources/photo_model');
+var _resourcesPhotoCollection = require('./resources/photoCollection');
 
-var _resourcesPhoto_model2 = _interopRequireDefault(_resourcesPhoto_model);
+var _resourcesPhotoCollection2 = _interopRequireDefault(_resourcesPhotoCollection);
+
+var _viewsHomeView = require('./views/homeView');
+
+var _viewsHomeView2 = _interopRequireDefault(_viewsHomeView);
 
 exports['default'] = _backbone2['default'].Router.extend({
 
   routes: {
-    "": "Home"
+    '': "redirectToHome",
+    "Home": "homePage"
   },
 
   initialize: function initialize(appElement) {
+
     this.el = appElement;
-    this.collection = new _resourcesPhoto_collection2['default']();
-    this.model = new _resourcesPhoto_model2['default']();
+    this.collection = new _resourcesPhotoCollection2['default']();
   },
 
   goto: function goto(route) {
@@ -170,21 +175,20 @@ exports['default'] = _backbone2['default'].Router.extend({
     _reactDom2['default'].render(component, this.el);
   },
 
-  Home: function Home() {
+  redirectToHome: function redirectToHome() {
+    this.navigate('Home', {
+      replace: true,
+      trigger: true
+    });
+  },
+
+  homePage: function homePage() {
     var _this = this;
 
     this.collection.fetch().then(function () {
-      _this.render(_react2['default'].createElement(_viewsPhoto2['default'], {
-        onDetailsClick: function (id) {
-          return _this.goto('detail/' + id);
-        },
-        onAddClick: function () {
-          return _this.goto('add');
-        },
-        pictures: function () {
-          return _this.collection.toJSON();
-        }
-      }));
+
+      _this.render(_react2['default'].createElement(_viewsHomeView2['default'], {
+        photos: _this.collection.toJSON() }));
     });
   },
 
@@ -196,7 +200,7 @@ exports['default'] = _backbone2['default'].Router.extend({
 });
 module.exports = exports['default'];
 
-},{"./resources/photo_collection":4,"./resources/photo_model":5,"./views/photo":7,"backbone":8,"react":167,"react-dom":11}],7:[function(require,module,exports){
+},{"./resources/photoCollection":4,"./resources/photoModel":5,"./views/homeView":7,"backbone":8,"jquery":10,"react":167,"react-dom":11}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -204,6 +208,10 @@ Object.defineProperty(exports, '__esModule', {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+
+var _backbone = require('backbone');
+
+var _backbone2 = _interopRequireDefault(_backbone);
 
 var _react = require('react');
 
@@ -214,63 +222,32 @@ var _reactDom = require('react-dom');
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
 exports['default'] = _react2['default'].createClass({
-  displayName: 'photo',
+  displayName: 'homeView',
 
-  clickHandler: function clickHandler(event) {
-    // we got the event but we dont need it.
-    this.props.onSelect(this.props.objectId);
-  },
-
-  addClickHandler: function addClickHandler() {
-    this.props.onAddClick();
-  },
-
-  getPhoto: function getPhoto(data) {
-    var _this = this;
-
+  processPhotos: function processPhotos(data) {
     return _react2['default'].createElement(
       'div',
-      { key: data.objectId, className: 'photoContainer',
-        onClick: function () {
-          return _this.ClickHandler(data.objectId);
-        } },
-      _react2['default'].createElement('img', { src: data.Img, className: 'photoHome' })
+      { className: 'photoContainer', key: data.objectId },
+      _react2['default'].createElement('img', { className: 'homePic', src: data.Img })
     );
   },
 
   render: function render() {
     return _react2['default'].createElement(
       'div',
-      { className: 'outer' },
+      { className: 'homeContainer' },
       _react2['default'].createElement(
         'div',
-        { className: 'main-header' },
-        _react2['default'].createElement(
-          'h2',
-          null,
-          'Pictures'
-        ),
-        _react2['default'].createElement(
-          'div',
-          { className: 'main-button' },
-          _react2['default'].createElement(
-            'button',
-            { className: 'main-add', onClick: this.addClickHandler },
-            'Add Picture'
-          )
-        )
-      ),
-      _react2['default'].createElement(
-        'div',
-        { className: 'thumbnail-list' },
-        this.props.data.map(this.getPhoto)
+        { className: 'homePhotos' },
+        this.props.photos.map(this.processPhotos)
       )
     );
   }
+
 });
 module.exports = exports['default'];
 
-},{"react":167,"react-dom":11}],8:[function(require,module,exports){
+},{"backbone":8,"react":167,"react-dom":11}],8:[function(require,module,exports){
 (function (global){
 //     Backbone.js 1.2.3
 

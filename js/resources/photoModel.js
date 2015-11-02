@@ -1,7 +1,8 @@
 import Backbone from 'backbone';
 import {APP_URL} from '../parse_data';
 
-export default Backbone.Model.extend({
+
+let PhotoModel = Backbone.Model.extend({
 
   urlRoot: APP_URL,
 
@@ -11,5 +12,6 @@ export default Backbone.Model.extend({
     let data = this.toJSON();
     return data;
   }
-
 });
+
+export default PhotoModel;

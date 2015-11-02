@@ -1,6 +1,7 @@
-import PhotoComponent from './photo'
-
+import PhotoComponent     from './photo'
+import homeView  from './homeView'
 
 export {
-  PhotoComponent
+  PhotoComponent,
+  homeView
 };
