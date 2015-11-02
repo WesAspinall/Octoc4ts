@@ -1,20 +1,22 @@
 ## Welcome to My Project
 
-> I am your Readme.md file, you should probably update me.
+> The Iron Yard Atlanta/Week 6 Assignment: Backbonejs & Reactjs
 
+##Goals:
+- Demonstrate a full understanding of Backbone Models, Collections and  Routers
+- Demonstrate an understanding of React Components
 
-## Assets Installed By Default
+## Libraries
+- [React](https://facebook.github.io/react/)
+- [Backbone.js](http://backbonejs.org/)
 
-- [Normalize CSS](https://necolas.github.io/normalize.css/)
-- [Bourbon](http://bourbon.io/)
-- [Neat](http://neat.bourbon.io/)
 
 
 ## Tools Used
-
 - [Babel](https://babeljs.io/)
 - [Browserify](http://browserify.org/)
 - [JavaScript Code Style](http://jscs.info/)
 - [SASS](http://sass-lang.com/)
-- [Mocha](https://mochajs.org/)
-- [Chai](http://chaijs.com/)
+- [Bourbon](http://bourbon.io/)
+- [Neat](http://neat.bourbon.io/)
+- [Normalize CSS](https://necolas.github.io/normalize.css/)
