@@ -1,6 +1,6 @@
 ## Welcome to My Project
 
-> The Iron Yard Atlanta/Week 6 Assignment: Backbonejs & Reactjs
+> The Iron Yard Atlanta/Week 6 Assignment: Backbone.js & React
 
 ##Goals:
 - Demonstrate a full understanding of Backbone Models, Collections and  Routers
