@@ -8,17 +8,23 @@ export default React.createClass({
  processPhotos(data) {
     return (
       <div className="photoContainer" key={data.objectId}>
-        <img className="homePic" src={data.Img}/>
+       <li className ="block">
+         <img className="homePic" src={data.Img}/>
+       </li>
       </div>
     );
   },
 
   render() { 
     return (
-     <div className="homeContainer"> 
-       <div className="homePhotos">
-        {this.props.photos.map(this.processPhotos)}
+     <div className="homeContainer">
+       <div className="header">
+          <span className ="logo"> instareact </span>
        </div>
+         <ul className="homePhotos"> 
+          {this.props.photos.map(this.processPhotos)}
+         </ul>
+
      </div> 
     )  
   }

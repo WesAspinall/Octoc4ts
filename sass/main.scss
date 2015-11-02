@@ -3,5 +3,26 @@
 @import "font-awesome";
 
 body {
-  background: #e2ebf3;
+  background: #FAFAFA;
+}
+
+.header{
+  @include outer-container;
+  max-width: 100%;
+  height: 77px;
+}
+
+ul{
+  @include outer-container;
+  padding-left: 0;
+
+    li{
+      @include span-columns(3);
+        .homePic{
+          width: 260px;
+          height: 260px;
+          border-radius: 20px;
+          padding: 5px;
+   }
+  } 
 }

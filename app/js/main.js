@@ -228,7 +228,11 @@ exports['default'] = _react2['default'].createClass({
     return _react2['default'].createElement(
       'div',
       { className: 'photoContainer', key: data.objectId },
-      _react2['default'].createElement('img', { className: 'homePic', src: data.Img })
+      _react2['default'].createElement(
+        'li',
+        { className: 'block' },
+        _react2['default'].createElement('img', { className: 'homePic', src: data.Img })
+      )
     );
   },
 
@@ -238,6 +242,15 @@ exports['default'] = _react2['default'].createClass({
       { className: 'homeContainer' },
       _react2['default'].createElement(
         'div',
+        { className: 'header' },
+        _react2['default'].createElement(
+          'span',
+          { className: 'logo' },
+          ' instareact '
+        )
+      ),
+      _react2['default'].createElement(
+        'ul',
         { className: 'homePhotos' },
         this.props.photos.map(this.processPhotos)
       )
