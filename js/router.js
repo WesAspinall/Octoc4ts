@@ -6,7 +6,6 @@ import $ from 'jquery';
 import PhotoModel from './resources/photoModel';
 import PhotoCollection from './resources/photoCollection';
 
-
 import HomeComponent from './views/homeView';
 
 export default Backbone.Router.extend({
@@ -14,6 +13,7 @@ export default Backbone.Router.extend({
     routes: {
     ''             : "redirectToHome",
     "Home"         : "homePage",
+    "Home/:id"     : "getDetails"
   },
 
 initialize(appElement) {
@@ -41,15 +41,18 @@ redirectToHome() {
 },
 
 
+
   homePage(){
-
     this.collection.fetch().then(() =>{
-
+      let peanutButter = this.el[0]
     this.render(
       <HomeComponent
-      photos={this.collection.toJSON()}/>
+      onNavigate = {(route) => this.navigate(route,{trigger:true})}
+      onPhotoSelect ={id => this.navigate(`Home/${id}`,{trigger: true})}
+      photos={this.collection.toJSON()}/>, 
+      peanutButter
       );
-   });
+    });
   },
 
 

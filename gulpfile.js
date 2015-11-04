@@ -12,7 +12,7 @@ var server  = require('gulp-server-livereload');
 var fontAwesome = require('node-font-awesome');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
-var htmlhint = require('gulp-htmlhint');
+// var htmlhint = require('gulp-htmlhint');
 var jscs = require('gulp-jscs');
 
 var notifyError = function() {
