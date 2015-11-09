@@ -1,7 +1,9 @@
-import PhotoComponent     from './photo'
-import homeView  from './homeView'
+import DetailsComponent from './detailsView'
+import HomeComponent  from './homeView'
+import HeaderComponent from './header'
 
 export {
-  PhotoComponent,
-  homeView
+  DetailsComponent,
+  HomeComponent,
+  HeaderComponent
 };

@@ -1,5 +1,5 @@
-import PhotoCollection from './photo_collection'
-import PhotoModel from './photo_model'
+import PhotoCollection from './photoCollection'
+import PhotoModel from './photoModel'
 
 
 export {

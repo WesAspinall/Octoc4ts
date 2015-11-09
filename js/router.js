@@ -3,57 +3,68 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import $ from 'jquery';
 
-import PhotoModel from './resources/photoModel';
-import PhotoCollection from './resources/photoCollection';
+import{
+  PhotoModel,
+  PhotoCollection
+} from './resources';
 
-import HomeComponent from './views/homeView';
+import{
+  DetailsComponent,
+  HeaderComponent,
+  HomeComponent
+} from './views';
 
 export default Backbone.Router.extend({
 
     routes: {
     ''             : "redirectToHome",
-    "Home"         : "homePage",
-    "Home/:id"     : "getDetails"
+    "home"         : "homeView",
+    "home/:id"     : "getDetails",
+    "upload"       : "uploadView"
   },
 
-initialize(appElement) {
+        initialize(appElement) {
 
-    this.el = appElement;
-    this.collection = new PhotoCollection();
+            this.el = appElement;
+            this.collection = new PhotoCollection();
 
-},
+        },
 
-  goto(route) {
-    this.navigate(route, {
-      trigger: true
-    });
-  },
+        goto(route) {
+          this.navigate(route, {
+            trigger: true
+          });
+        },
 
-render(component){
-  ReactDom.render(component, this.el);
-},
+        render(component){
+          ReactDom.render(component, this.el);
+        },
 
-redirectToHome() {
-  this.navigate('Home',{
-    replace: true,
-    trigger: true
-  })
-},
+        redirectToHome() {
+          this.navigate('home',{
+            replace: true,
+            trigger: true
+          })
+        },
 
-
-
-  homePage(){
+    homeView(){
     this.collection.fetch().then(() =>{
       let peanutButter = this.el[0]
     this.render(
       <HomeComponent
-      onNavigate = {(route) => this.navigate(route,{trigger:true})}
-      onPhotoSelect ={id => this.navigate(`Home/${id}`,{trigger: true})}
+      onPhotoSelect ={(id) => 
+      this.goto(`home/${id}`,{trigger: true})}
       photos={this.collection.toJSON()}/>, 
       peanutButter
       );
     });
   },
+
+getDetails(id){
+this.render(
+  <DetailsComponent/>
+  )
+},
 
 
 start() {

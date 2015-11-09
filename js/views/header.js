@@ -1,6 +1,14 @@
 import React from 'react';
 
 export default React.createClass({
+ 
+ navigateHome() {
+    this.props.onNavigate('Home');
+  },
+
+navigateUpload() {
+    this.props.onNavigate('uploadView');
+  },
 
       render() {
     return (
@@ -11,7 +19,7 @@ export default React.createClass({
       </div>
       <div className="links">
         <div onClick={this.navigateHome} className="button-home">Home</div>
-        <div onClick={this.navigateNewBand} className="button-newband">Upload</div>
+        <div onClick={this.navigateUpload} className="uploadView-button">Upload</div>
       </div>
       </div>
     );
