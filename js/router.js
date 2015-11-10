@@ -13,7 +13,8 @@ import{
   HeaderComponent,
   HomeComponent,
   UploadComponent,
-  EditComponent
+  EditComponent,
+  FooterComponent
 } from './views';
 
 export default Backbone.Router.extend({
@@ -21,7 +22,7 @@ export default Backbone.Router.extend({
     routes: {
     ''             : "redirectToHome",
     "home"         : "homeView",
-    "home/:id"     : "getDetails",
+    "details/:id"  : "getDetails",
     "upload"       : "upload",
     "edit/:id"     : "edit"
   },
@@ -59,8 +60,9 @@ export default Backbone.Router.extend({
       onHomeClick={()=>this.goto('home')}/>
       <HomeComponent
       onPhotoSelect ={(id) => 
-      this.goto(`home/${id}`,{trigger: true})}
+      this.goto(`details/${id}`,{trigger: true})}
       photos={this.collection.toJSON()}/>
+      <FooterComponent/>
       </wrap>
       );
     });
@@ -74,6 +76,7 @@ export default Backbone.Router.extend({
         onHomeClick={()=>this.goto('home')}/>
         <DetailsComponent
         onEditClick={(id)=>this.goto(`edit/${id}`,{trigger: true})}/>
+        <FooterComponent/>
       </wrap>
       )
     },
@@ -85,6 +88,7 @@ export default Backbone.Router.extend({
           onUploadClick={()=>this.goto('upload')}
           onHomeClick={()=>this.goto('home')}/>
           <UploadComponent/>
+          <FooterComponent/>
         </wrap>
         )
     },
@@ -96,6 +100,7 @@ export default Backbone.Router.extend({
         onUploadClick={()=>this.goto('upload')}
         onHomeClick={()=>this.goto('home')}/>
        <EditComponent/>
+       <FooterComponent/>
       </wrap>
       )
     },
