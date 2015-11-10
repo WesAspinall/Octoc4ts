@@ -12,7 +12,8 @@ import{
   DetailsComponent,
   HeaderComponent,
   HomeComponent,
-  UploadComponent
+  UploadComponent,
+  EditComponent
 } from './views';
 
 export default Backbone.Router.extend({
@@ -21,7 +22,8 @@ export default Backbone.Router.extend({
     ''             : "redirectToHome",
     "home"         : "homeView",
     "home/:id"     : "getDetails",
-    "upload"       : "upload"
+    "upload"       : "upload",
+    "edit/:id"     : "edit"
   },
 
         initialize(appElement) {
@@ -70,7 +72,8 @@ export default Backbone.Router.extend({
         <HeaderComponent
         onUploadClick={()=>this.goto('upload')}
         onHomeClick={()=>this.goto('home')}/>
-        <DetailsComponent/>
+        <DetailsComponent
+        onEditClick={(id)=>this.goto(`edit/${id}`,{trigger: true})}/>
       </wrap>
       )
     },
@@ -86,6 +89,16 @@ export default Backbone.Router.extend({
         )
     },
 
+    edit(id){
+      this.render(
+      <wrap>
+       <HeaderComponent
+        onUploadClick={()=>this.goto('upload')}
+        onHomeClick={()=>this.goto('home')}/>
+       <EditComponent/>
+      </wrap>
+      )
+    },
 
     start() {
         Backbone.history.start();
