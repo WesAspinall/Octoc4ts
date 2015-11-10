@@ -11,7 +11,8 @@ import{
 import{
   DetailsComponent,
   HeaderComponent,
-  HomeComponent
+  HomeComponent,
+  UploadComponent
 } from './views';
 
 export default Backbone.Router.extend({
@@ -20,7 +21,7 @@ export default Backbone.Router.extend({
     ''             : "redirectToHome",
     "home"         : "homeView",
     "home/:id"     : "getDetails",
-    "upload"       : "uploadView"
+    "upload"       : "upload"
   },
 
         initialize(appElement) {
@@ -49,28 +50,47 @@ export default Backbone.Router.extend({
 
     homeView(){
     this.collection.fetch().then(() =>{
-      let peanutButter = this.el[0]
     this.render(
+      <wrap>
+      <HeaderComponent
+      onUploadClick={()=>this.goto('upload')}
+      onHomeClick={()=>this.goto('home')}/>
       <HomeComponent
       onPhotoSelect ={(id) => 
       this.goto(`home/${id}`,{trigger: true})}
-      photos={this.collection.toJSON()}/>, 
-      peanutButter
+      photos={this.collection.toJSON()}/>
+      </wrap>
       );
     });
   },
 
-getDetails(id){
-this.render(
-  <DetailsComponent/>
-  )
-},
+    getDetails(id){
+    this.render(
+      <wrap>
+        <HeaderComponent
+        onUploadClick={()=>this.goto('upload')}
+        onHomeClick={()=>this.goto('home')}/>
+        <DetailsComponent/>
+      </wrap>
+      )
+    },
+
+    upload(){
+      this.render(
+        <wrap>
+          <HeaderComponent
+          onUploadClick={()=>this.goto('upload')}
+          onHomeClick={()=>this.goto('home')}/>
+          <UploadComponent/>
+        </wrap>
+        )
+    },
 
 
-start() {
-    Backbone.history.start();
-    return this;
-  },
+    start() {
+        Backbone.history.start();
+        return this;
+      },
 
 });
 
