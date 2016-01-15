@@ -68,18 +68,54 @@ export default Backbone.Router.extend({
     });
   },
 
-    getDetails(id){
-    this.render(
-      <wrap>
+    // getDetails(id){
+    // this.render(
+    //   <wrap>
+    //     <HeaderComponent
+    //     onUploadClick={()=>this.goto('upload')}
+    //     onHomeClick={()=>this.goto('home')}/>
+    //     <DetailsComponent
+    //     onEditClick={(id)=>this.goto(`edit/${id}`,{trigger: true})}/>
+    //     <FooterComponent/>
+    //   </wrap>
+    //   )
+    // },
+    getDetails(id) {
+    let image = this.collection.get(id);
+
+    if (image) {
+      this.render(
+        <wrap>
         <HeaderComponent
-        onUploadClick={()=>this.goto('upload')}
-        onHomeClick={()=>this.goto('home')}/>
+         onUploadClick={()=>this.goto('upload')}
+         onHomeClick={()=>this.goto('home')}/>
         <DetailsComponent
-        onEditClick={(id)=>this.goto(`edit/${id}`,{trigger: true})}/>
+          details={image.toJSON()}
+        />
         <FooterComponent/>
-      </wrap>
-      )
-    },
+        </wrap>
+
+      );
+      
+    } else {
+      image = this.collection.add({objectId: id});
+      image.fetch().then(() => {
+        this.render(
+        <wrap>
+          <HeaderComponent
+         onUploadClick={()=>this.goto('upload')}
+         onHomeClick={()=>this.goto('home')}/>
+          <DetailsComponent
+            onBackClick={() => this.goto('picture')}
+            onEditClick={(id) => this.goto('edit/' + id)}
+            details={image.toJSON()}
+          />
+           <FooterComponent/>
+          </wrap>
+        );
+      });
+    }
+  },
 
     upload(){
       this.render(

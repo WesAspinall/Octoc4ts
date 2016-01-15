@@ -221,25 +221,65 @@ exports['default'] = _backbone2['default'].Router.extend({
     });
   },
 
+  // getDetails(id){
+  // this.render(
+  //   <wrap>
+  //     <HeaderComponent
+  //     onUploadClick={()=>this.goto('upload')}
+  //     onHomeClick={()=>this.goto('home')}/>
+  //     <DetailsComponent
+  //     onEditClick={(id)=>this.goto(`edit/${id}`,{trigger: true})}/>
+  //     <FooterComponent/>
+  //   </wrap>
+  //   )
+  // },
   getDetails: function getDetails(id) {
     var _this2 = this;
 
-    this.render(_react2['default'].createElement(
-      'wrap',
-      null,
-      _react2['default'].createElement(_views.HeaderComponent, {
-        onUploadClick: function () {
-          return _this2.goto('upload');
-        },
-        onHomeClick: function () {
-          return _this2.goto('home');
-        } }),
-      _react2['default'].createElement(_views.DetailsComponent, {
-        onEditClick: function (id) {
-          return _this2.goto('edit/' + id, { trigger: true });
-        } }),
-      _react2['default'].createElement(_views.FooterComponent, null)
-    ));
+    var image = this.collection.get(id);
+
+    if (image) {
+      this.render(_react2['default'].createElement(
+        'wrap',
+        null,
+        _react2['default'].createElement(_views.HeaderComponent, {
+          onUploadClick: function () {
+            return _this2.goto('upload');
+          },
+          onHomeClick: function () {
+            return _this2.goto('home');
+          } }),
+        _react2['default'].createElement(_views.DetailsComponent, {
+          details: image.toJSON()
+        }),
+        _react2['default'].createElement(_views.FooterComponent, null)
+      ));
+    } else {
+      image = this.collection.add({ objectId: id });
+      image.fetch().then(function () {
+        _this2.render(_react2['default'].createElement(
+          'wrap',
+          null,
+          _react2['default'].createElement(_views.HeaderComponent, {
+            onUploadClick: function () {
+              return _this2.goto('upload');
+            },
+            onHomeClick: function () {
+              return _this2.goto('home');
+            } }),
+          _react2['default'].createElement(_views.DetailsComponent, {
+            onBackClick: function () {
+              return _this2.goto('picture');
+            },
+            onEditClick: function (id) {
+              return _this2.goto('edit/' + id);
+            },
+            details: image.toJSON()
+          }),
+          _react2['default'].createElement(_views.FooterComponent, null)
+        ));
+      });
+    }
   },
 
   upload: function upload() {
@@ -310,6 +350,11 @@ exports['default'] = _react2['default'].createClass({
     return _react2['default'].createElement(
       'div',
       { className: 'detailContainer' },
+      _react2['default'].createElement(
+        'div',
+        { className: 'detail-img' },
+        _react2['default'].createElement('img', { src: this.props.details.Img })
+      ),
       _react2['default'].createElement(
         'button',
         { className: 'editBtn', onClick: this.goToEdit },

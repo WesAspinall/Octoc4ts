@@ -9,6 +9,10 @@ export default React.createClass({
     return(
 
     <div className='detailContainer'>
+    <div className="detail-img">
+          <img src={this.props.details.Img}/>  
+    </div>   
+
 
     <button className='editBtn' onClick={this.goToEdit}>Edit</button>
 

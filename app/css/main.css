@@ -2090,4 +2090,8 @@ ul {
     .homeContainer .photoContainer:nth-child(4n+1) {
       clear: left; }
 
+.detail-img img {
+  max-width: 500px;
+  max-height: 700px; }
+
 /*# sourceMappingURL=main.css.map */
