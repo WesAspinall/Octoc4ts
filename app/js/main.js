@@ -253,6 +253,9 @@ exports['default'] = _backbone2['default'].Router.extend({
           details: image.toJSON(),
           onBackClick: function () {
             return _this2.goto('home');
+          },
+          onEditClick: function () {
+            return _this2.goto('edit/' + id, { trigger: true });
           }
         }),
         _react2['default'].createElement(_views.FooterComponent, null)
@@ -313,7 +316,9 @@ exports['default'] = _backbone2['default'].Router.extend({
         onHomeClick: function () {
           return _this4.goto('home');
         } }),
-      _react2['default'].createElement(_views.EditComponent, null),
+      _react2['default'].createElement(_views.EditComponent, { onBackClick: function () {
+          return _this4.goto('details/' + id, { trigger: true });
+        } }),
       _react2['default'].createElement(_views.FooterComponent, null)
     ));
   },
@@ -345,6 +350,9 @@ exports['default'] = _react2['default'].createClass({
   backClickHandler: function backClickHandler() {
     this.props.onBackClick();
   },
+  editClickHandler: function editClickHandler() {
+    this.props.onEditClick();
+  },
 
   render: function render() {
     return _react2['default'].createElement(
@@ -362,7 +370,7 @@ exports['default'] = _react2['default'].createClass({
       ),
       _react2['default'].createElement(
         'button',
-        null,
+        { onClick: this.editClickHandler },
         'edit'
       )
     );
@@ -386,6 +394,10 @@ var _react2 = _interopRequireDefault(_react);
 exports['default'] = _react2['default'].createClass({
   displayName: 'editView',
 
+  backClickHandler: function backClickHandler() {
+    this.props.onBackClick();
+  },
+
   render: function render() {
     return _react2['default'].createElement(
       'div',
@@ -400,6 +412,11 @@ exports['default'] = _react2['default'].createClass({
           { className: 'editSaveBtn' },
           'save'
         )
+      ),
+      _react2['default'].createElement(
+        'button',
+        { onClick: this.backClickHandler },
+        'back'
       )
     );
   }

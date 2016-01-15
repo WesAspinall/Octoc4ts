@@ -1,6 +1,11 @@
 import React from 'react';
 export default React.createClass({
 
+backClickHandler() {
+    this.props.onBackClick();
+  },
+
+
   render() {
     return(
     <div className='editContainer'>
@@ -9,6 +14,7 @@ export default React.createClass({
         <input className= "editDescription" placeholder="edit description here..."/>
         <button className="editSaveBtn">save</button>
       </form>
+    <button onClick={this.backClickHandler}>back</button>
     </div>
     )
   }

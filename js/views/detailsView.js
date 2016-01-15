@@ -4,7 +4,9 @@ export default React.createClass({
    backClickHandler() {
     this.props.onBackClick();
   },
-
+  editClickHandler() {
+    this.props.onEditClick();
+  },
 
   render() {
     return(
@@ -14,7 +16,7 @@ export default React.createClass({
         <div className="detail-img">
             <img src={this.props.details.Img}/>  
         </div>   
-      <button>edit</button>
+      <button onClick={this.editClickHandler}>edit</button>
     </div>
 
     )
