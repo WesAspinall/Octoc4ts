@@ -91,6 +91,7 @@ export default Backbone.Router.extend({
          onHomeClick={()=>this.goto('home')}/>
         <DetailsComponent
           details={image.toJSON()}
+          onBackClick={() => this.goto('home')}
         />
         <FooterComponent/>
         </wrap>
@@ -106,8 +107,7 @@ export default Backbone.Router.extend({
          onUploadClick={()=>this.goto('upload')}
          onHomeClick={()=>this.goto('home')}/>
           <DetailsComponent
-            onBackClick={() => this.goto('picture')}
-            onEditClick={(id) => this.goto('edit/' + id)}
+            onBackClick={() => this.goto('home')}
             details={image.toJSON()}
           />
            <FooterComponent/>

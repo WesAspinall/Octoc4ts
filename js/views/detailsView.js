@@ -1,21 +1,20 @@
 import React from 'react';
 export default React.createClass({
 
-  goToEdit() {
-    this.props.onEditClick();
+   backClickHandler() {
+    this.props.onBackClick();
   },
+
 
   render() {
     return(
 
-    <div className='detailContainer'>
-    <div className="detail-img">
-          <img src={this.props.details.Img}/>  
-    </div>   
-
-
-    <button className='editBtn' onClick={this.goToEdit}>Edit</button>
-
+    <div className='detailsContainer'>
+      <button onClick={this.backClickHandler}>back</button>
+        <div className="detail-img">
+            <img src={this.props.details.Img}/>  
+        </div>   
+      <button>edit</button>
     </div>
 
     )

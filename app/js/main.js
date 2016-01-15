@@ -250,7 +250,10 @@ exports['default'] = _backbone2['default'].Router.extend({
             return _this2.goto('home');
           } }),
         _react2['default'].createElement(_views.DetailsComponent, {
-          details: image.toJSON()
+          details: image.toJSON(),
+          onBackClick: function () {
+            return _this2.goto('home');
+          }
         }),
         _react2['default'].createElement(_views.FooterComponent, null)
       ));
@@ -269,10 +272,7 @@ exports['default'] = _backbone2['default'].Router.extend({
             } }),
           _react2['default'].createElement(_views.DetailsComponent, {
             onBackClick: function () {
-              return _this2.goto('picture');
-            },
-            onEditClick: function (id) {
-              return _this2.goto('edit/' + id);
+              return _this2.goto('home');
             },
             details: image.toJSON()
           }),
@@ -342,14 +342,19 @@ var _react2 = _interopRequireDefault(_react);
 exports['default'] = _react2['default'].createClass({
   displayName: 'detailsView',
 
-  goToEdit: function goToEdit() {
-    this.props.onEditClick();
+  backClickHandler: function backClickHandler() {
+    this.props.onBackClick();
   },
 
   render: function render() {
     return _react2['default'].createElement(
       'div',
-      { className: 'detailContainer' },
+      { className: 'detailsContainer' },
+      _react2['default'].createElement(
+        'button',
+        { onClick: this.backClickHandler },
+        'back'
+      ),
       _react2['default'].createElement(
         'div',
         { className: 'detail-img' },
@@ -357,8 +362,8 @@ exports['default'] = _react2['default'].createClass({
       ),
       _react2['default'].createElement(
         'button',
-        { className: 'editBtn', onClick: this.goToEdit },
-        'Edit'
+        null,
+        'edit'
       )
     );
   }
@@ -366,37 +371,40 @@ exports['default'] = _react2['default'].createClass({
 module.exports = exports['default'];
 
 },{"react":174}],9:[function(require,module,exports){
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
+Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-exports["default"] = _react2["default"].createClass({
-  displayName: "editView",
+exports['default'] = _react2['default'].createClass({
+  displayName: 'editView',
 
   render: function render() {
-
-    _react2["default"].createElement(
-      "form",
-      null,
-      _react2["default"].createElement("input", { className: "editUrl", placeholder: "edit url here ..." }),
-      _react2["default"].createElement("input", { className: "editDescription", placeholder: "edit description here..." }),
-      _react2["default"].createElement(
-        "button",
-        { className: "editSaveBtn" },
-        "save"
+    return _react2['default'].createElement(
+      'div',
+      { className: 'editContainer' },
+      _react2['default'].createElement(
+        'form',
+        null,
+        _react2['default'].createElement('input', { className: 'editUrl', placeholder: 'edit url here ...' }),
+        _react2['default'].createElement('input', { className: 'editDescription', placeholder: 'edit description here...' }),
+        _react2['default'].createElement(
+          'button',
+          { className: 'editSaveBtn' },
+          'save'
+        )
       )
     );
   }
 });
-module.exports = exports["default"];
+module.exports = exports['default'];
 
 },{"react":174}],10:[function(require,module,exports){
 "use strict";
