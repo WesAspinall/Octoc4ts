@@ -45,8 +45,8 @@ new _router2['default'](appElement).start();
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var APP_ID = 'R5am1ZD46HujS0DLDYruGSPLvHtvoRs3eR0X701B';
-var API_KEY = 'dhjVfFIeOu0U8trp6eKnQJYYWlIJOI3OsUrUFC6e';
+var APP_ID = 'yH81VtERK8da3ccW6S2hW7VBYuhNajqmeWCDr6xq';
+var API_KEY = 'uFLzkJJeUTRTRkDqbVQJwwHkTdQlSHNPuQSFhx6V';
 var APP_URL = 'https://api.parse.com/1/classes/photos';
 
 exports.APP_ID = APP_ID;

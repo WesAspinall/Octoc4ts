@@ -2035,8 +2035,7 @@ body {
     display: table; }
 
 .header {
-  height: 100px;
-  border: 1px solid black; }
+  height: 100px; }
   .header .logo {
     font-size: 3em;
     display: inline-block; }
@@ -2044,6 +2043,13 @@ body {
     float: right;
     height: 80px;
     display: inline-block; }
+    .header .links .button-home, .header .links .uploadView-button {
+      display: inline-block;
+      padding: 40px 10px 0 0;
+      font-family: 'Permanent Marker', cursive; }
+    .header .links .button-home:hover, .header .links .uploadView-button:hover {
+      -webkit-text-stroke: 1px black;
+      color: white; }
 
 .insta {
   font-family: 'Yellowtail', cursive; }
