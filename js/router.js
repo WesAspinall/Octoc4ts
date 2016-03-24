@@ -55,31 +55,19 @@ export default Backbone.Router.extend({
     this.collection.fetch().then(() =>{
     this.render(
       <wrap>
-      <HeaderComponent
-      onUploadClick={()=>this.goto('upload')}
-      onHomeClick={()=>this.goto('home')}/>
-      <HomeComponent
-      onPhotoSelect ={(id) => 
-      this.goto(`details/${id}`,{trigger: true})}
-      photos={this.collection.toJSON()}/>
-      <FooterComponent/>
+        <HeaderComponent
+        onUploadClick={()=>this.goto('upload')}
+        onHomeClick={()=>this.goto('home')}/>
+        <HomeComponent
+        onPhotoSelect ={(id) => 
+        this.goto(`details/${id}`,{trigger: true})}
+        photos={this.collection.toJSON()}/>
+        <FooterComponent/>
       </wrap>
       );
     });
   },
 
-    // getDetails(id){
-    // this.render(
-    //   <wrap>
-    //     <HeaderComponent
-    //     onUploadClick={()=>this.goto('upload')}
-    //     onHomeClick={()=>this.goto('home')}/>
-    //     <DetailsComponent
-    //     onEditClick={(id)=>this.goto(`edit/${id}`,{trigger: true})}/>
-    //     <FooterComponent/>
-    //   </wrap>
-    //   )
-    // },
     getDetails(id) {
     let image = this.collection.get(id);
 
@@ -124,23 +112,23 @@ export default Backbone.Router.extend({
           <HeaderComponent
           onUploadClick={()=>this.goto('upload')}
           onHomeClick={()=>this.goto('home')}/>
-          <UploadComponent/>
+          <UploadComponent
+            onSubmitClick={(img)=> {
+              let newAdd = new PhotoModel ({
+
+                Img: img
+
+              });
+              newAdd.save().then(() => {
+                this.goto('home');
+              });
+
+            }}/>
           <FooterComponent/>
         </wrap>
         )
     },
 
-    edit(id){
-      this.render(
-      <wrap>
-         <HeaderComponent
-            onUploadClick={()=>this.goto('upload')}
-            onHomeClick={()=>this.goto('home')}/>
-           <EditComponent onBackClick={() => this.goto(`details/${id}`,{trigger: true})}/>
-         <FooterComponent/>
-      </wrap>
-      )
-    },
 
     start() {
         Backbone.history.start();

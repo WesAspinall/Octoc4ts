@@ -221,18 +221,6 @@ exports['default'] = _backbone2['default'].Router.extend({
     });
   },
 
-  // getDetails(id){
-  // this.render(
-  //   <wrap>
-  //     <HeaderComponent
-  //     onUploadClick={()=>this.goto('upload')}
-  //     onHomeClick={()=>this.goto('home')}/>
-  //     <DetailsComponent
-  //     onEditClick={(id)=>this.goto(`edit/${id}`,{trigger: true})}/>
-  //     <FooterComponent/>
-  //   </wrap>
-  //   )
-  // },
   getDetails: function getDetails(id) {
     var _this2 = this;
 
@@ -298,26 +286,16 @@ exports['default'] = _backbone2['default'].Router.extend({
         onHomeClick: function () {
           return _this3.goto('home');
         } }),
-      _react2['default'].createElement(_views.UploadComponent, null),
-      _react2['default'].createElement(_views.FooterComponent, null)
-    ));
-  },
+      _react2['default'].createElement(_views.UploadComponent, {
+        onSubmitClick: function (img) {
+          var newAdd = new _resources.PhotoModel({
 
-  edit: function edit(id) {
-    var _this4 = this;
+            Img: img
 
-    this.render(_react2['default'].createElement(
-      'wrap',
-      null,
-      _react2['default'].createElement(_views.HeaderComponent, {
-        onUploadClick: function () {
-          return _this4.goto('upload');
-        },
-        onHomeClick: function () {
-          return _this4.goto('home');
-        } }),
-      _react2['default'].createElement(_views.EditComponent, { onBackClick: function () {
-          return _this4.goto('details/' + id, { trigger: true });
+          });
+          newAdd.save().then(function () {
+            _this3.goto('home');
+          });
         } }),
       _react2['default'].createElement(_views.FooterComponent, null)
     ));
@@ -398,6 +376,27 @@ exports['default'] = _react2['default'].createClass({
     this.props.onBackClick();
   },
 
+  getInitialState: function getInitialState() {
+    return {
+
+      Url: this.props.edit.Url
+
+    };
+  },
+
+  submitHandler: function submitHandler(event) {
+    event.preventDefault();
+    this.props.onSubmit(this.state.Url);
+  },
+
+  updateUrl: function updateUrl(event) {
+    var newUrl = event.currentTarget.value;
+
+    this.setState({
+      Url: newUrl
+    });
+  },
+
   render: function render() {
     return _react2['default'].createElement(
       'div',
@@ -405,8 +404,7 @@ exports['default'] = _react2['default'].createClass({
       _react2['default'].createElement(
         'form',
         null,
-        _react2['default'].createElement('input', { className: 'editUrl', placeholder: 'edit url here ...' }),
-        _react2['default'].createElement('input', { className: 'editDescription', placeholder: 'edit description here...' }),
+        _react2['default'].createElement('input', { className: 'editUrl', onChange: this.updateUrl, type: 'url', value: this.state.Url, placeholder: 'edit url here ...' }),
         _react2['default'].createElement(
           'button',
           { className: 'editSaveBtn' },
@@ -635,15 +633,28 @@ var _react2 = _interopRequireDefault(_react);
 exports['default'] = _react2['default'].createClass({
   displayName: 'uploadView',
 
+  submitHandler: function submitHandler(event) {
+    event.preventDefault();
+    this.props.onSubmitClick(this.state.Url);
+  },
+
+  updateUrl: function updateUrl(event) {
+    var newUrl = event.currentTarget.value;
+
+    this.setState({
+      Url: newUrl
+    });
+  },
+
   render: function render() {
     return _react2['default'].createElement(
       'form',
       null,
-      _react2['default'].createElement('input', { className: 'uploadInput', placeholder: 'type url . . .' }),
+      _react2['default'].createElement('input', { className: 'uploadInput', onChange: this.updateUrl, placeholder: 'type url . . .' }),
       _react2['default'].createElement(
         'button',
-        { className: 'uploadSubmit' },
-        'Upload'
+        { className: 'uploadSubmit', onClick: this.submitHandler },
+        'Submit'
       )
     );
   }

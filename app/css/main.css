@@ -2065,10 +2065,11 @@ ul {
       width: 250px;
       height: 250px;
       margin-bottom: 20px;
-      border: 1px solid black; }
+      border: 1px solid grey; }
 
 .homePic:hover {
-  box-shadow: 3px 3px 3px grey; }
+  border-bottom: 2px solid grey;
+  border-right: 2px solid grey; }
 
 .homeContainer {
   max-width: 68em;
