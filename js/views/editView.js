@@ -8,21 +8,21 @@ backClickHandler() {
 getInitialState() {
     return {
      
-      Url: this.props.edit.Url,
+      Img: this.props.record.Img,
       
     };
   }, 
 
-submitHandler(event) {
+saveHandler(event) {
     event.preventDefault();
-    this.props.onSubmit(this.state.Url);
+    this.props.onSave(this.state.Img);
   },
 
 updateUrl(event) {
     let newUrl = event.currentTarget.value;
 
     this.setState({
-      Url: newUrl
+      Img: newUrl
     });
   },
 
@@ -31,8 +31,8 @@ updateUrl(event) {
     return(
     <div className='editContainer'>
       <form>
-        <input className="editUrl" onChange={this.updateUrl} type="url" value={this.state.Url}  placeholder="edit url here ..."/>
-        <button className="editSaveBtn">save</button>
+        <input className="editUrl" onChange={this.updateUrl} type="url" value={this.state.Img}  placeholder="edit url here ..."/>
+        <button className="editSaveBtn" onClick={this.saveHandler}>save</button>
       </form>
     <button onClick={this.backClickHandler}>back</button>
     </div>

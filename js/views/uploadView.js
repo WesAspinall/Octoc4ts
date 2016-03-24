@@ -1,6 +1,7 @@
 import React from 'react';
 export default React.createClass({
 
+//on submit, this function references Upload component's props
   submitHandler(event) {
   	event.preventDefault();
     this.props.onSubmitClick(this.state.Img);

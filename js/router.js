@@ -27,29 +27,29 @@ export default Backbone.Router.extend({
     "edit/:id"     : "edit"
   },
 
-        initialize(appElement) {
+  initialize(appElement) {
 
-            this.el = appElement;
-            this.collection = new PhotoCollection();
+    this.el = appElement;
+    this.collection = new PhotoCollection();
+    this.model = new PhotoModel();
+  },
 
-        },
+  goto(route) {
+    this.navigate(route, {
+      trigger: true
+    });
+  },
 
-        goto(route) {
-          this.navigate(route, {
-            trigger: true
-          });
-        },
+  render(component){
+    ReactDom.render(component, this.el);
+  },
 
-        render(component){
-          ReactDom.render(component, this.el);
-        },
-
-        redirectToHome() {
-          this.navigate('home',{
-            replace: true,
-            trigger: true
-          })
-        },
+  redirectToHome() {
+    this.navigate('home',{
+      replace: true,
+      trigger: true
+    })
+  },
 
     homeView(){
     this.collection.fetch().then(() =>{
@@ -98,6 +98,7 @@ export default Backbone.Router.extend({
           <DetailsComponent
             onBackClick={() => this.goto('home')}
             details={image.toJSON()}
+            onEditClick={(id) => this.goto('edit/' + id)}
           />
            <FooterComponent/>
           </wrap>
@@ -129,6 +130,25 @@ export default Backbone.Router.extend({
         )
     },
 
+  edit(id) {
+    let pizza = this.collection.get(id);
+    this.render(
+      <EditComponent
+        record={pizza.toJSON()}
+        onBackClick={() => this.goto('details/' + id)}
+        onSave={(Img) => this.saveForm(Img, id)}
+      />
+    );
+      
+  },
+
+  saveForm(img, id) {
+    this.collection.get(id).save({
+      Img: img
+    }).then(() => {
+      this.goto('home');
+    });
+  },
 
     start() {
         Backbone.history.start();

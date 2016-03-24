@@ -178,6 +178,7 @@ exports['default'] = _backbone2['default'].Router.extend({
 
     this.el = appElement;
     this.collection = new _resources.PhotoCollection();
+    this.model = new _resources.PhotoModel();
   },
 
   goto: function goto(route) {
@@ -265,7 +266,10 @@ exports['default'] = _backbone2['default'].Router.extend({
             onBackClick: function () {
               return _this2.goto('home');
             },
-            details: image.toJSON()
+            details: image.toJSON(),
+            onEditClick: function (id) {
+              return _this2.goto('edit/' + id);
+            }
           }),
           _react2['default'].createElement(_views.FooterComponent, null)
         ));
@@ -299,6 +303,31 @@ exports['default'] = _backbone2['default'].Router.extend({
         } }),
       _react2['default'].createElement(_views.FooterComponent, null)
     ));
+  },
+
+  edit: function edit(id) {
+    var _this4 = this;
+
+    var pizza = this.collection.get(id);
+    this.render(_react2['default'].createElement(_views.EditComponent, {
+      record: pizza.toJSON(),
+      onBackClick: function () {
+        return _this4.goto('details/' + id);
+      },
+      onSave: function (Img) {
+        return _this4.saveForm(Img, id);
+      }
+    }));
+  },
+
+  saveForm: function saveForm(img, id) {
+    var _this5 = this;
+
+    this.collection.get(id).save({
+      Img: img
+    }).then(function () {
+      _this5.goto('home');
+    });
   },
 
   start: function start() {
@@ -379,21 +408,21 @@ exports['default'] = _react2['default'].createClass({
   getInitialState: function getInitialState() {
     return {
 
-      Url: this.props.edit.Url
+      Img: this.props.record.Img
 
     };
   },
 
-  submitHandler: function submitHandler(event) {
+  saveHandler: function saveHandler(event) {
     event.preventDefault();
-    this.props.onSubmit(this.state.Url);
+    this.props.onSave(this.state.Img);
   },
 
   updateUrl: function updateUrl(event) {
     var newUrl = event.currentTarget.value;
 
     this.setState({
-      Url: newUrl
+      Img: newUrl
     });
   },
 
@@ -404,10 +433,10 @@ exports['default'] = _react2['default'].createClass({
       _react2['default'].createElement(
         'form',
         null,
-        _react2['default'].createElement('input', { className: 'editUrl', onChange: this.updateUrl, type: 'url', value: this.state.Url, placeholder: 'edit url here ...' }),
+        _react2['default'].createElement('input', { className: 'editUrl', onChange: this.updateUrl, type: 'url', value: this.state.Img, placeholder: 'edit url here ...' }),
         _react2['default'].createElement(
           'button',
-          { className: 'editSaveBtn' },
+          { className: 'editSaveBtn', onClick: this.saveHandler },
           'save'
         )
       ),
@@ -633,16 +662,17 @@ var _react2 = _interopRequireDefault(_react);
 exports['default'] = _react2['default'].createClass({
   displayName: 'uploadView',
 
+  //on submit, this function references Upload component's props
   submitHandler: function submitHandler(event) {
     event.preventDefault();
-    this.props.onSubmitClick(this.state.Url);
+    this.props.onSubmitClick(this.state.Img);
   },
 
   updateUrl: function updateUrl(event) {
     var newUrl = event.currentTarget.value;
 
     this.setState({
-      Url: newUrl
+      Img: newUrl
     });
   },
 
