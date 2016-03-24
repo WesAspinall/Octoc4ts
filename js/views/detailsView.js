@@ -12,11 +12,13 @@ export default React.createClass({
     return(
 
     <div className='detailsContainer'>
-      <button onClick={this.backClickHandler}>back</button>
+      <ul>
+        <li><button onClick={this.backClickHandler}>back</button></li>
+        <li><button onClick={this.editClickHandler}>edit photo</button></li>
+      </ul>
         <div className="detail-img">
             <img src={this.props.details.Img}/>  
         </div>   
-      <button onClick={this.editClickHandler}>edit</button>
     </div>
 
     )

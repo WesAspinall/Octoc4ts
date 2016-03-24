@@ -2025,37 +2025,54 @@ html {
   content: ""; }
 
 body {
-  max-width: 68em;
-  margin-left: auto;
-  margin-right: auto;
-  background: #FAFAFA; }
-  body::after {
-    clear: both;
-    content: "";
-    display: table; }
+  background: #FAFAFA;
+  width: 100%; }
 
 .header {
-  height: 100px; }
+  background: white;
+  height: 100px;
+  width: 100%;
+  padding: 0 6em; }
   .header .logo {
     font-size: 3em;
-    display: inline-block; }
+    display: inline-block;
+    transition: all 1s ease;
+    -webkit-text-stroke: .5px black;
+    width: 33%; }
+  .header .search {
+    width: 33%;
+    display: inline-block;
+    text-align: center; }
+    .header .search input {
+      border-radius: 20px;
+      font-weight: 100; }
   .header .links {
     float: right;
     height: 80px;
-    display: inline-block; }
+    display: inline-block;
+    width: 33%;
+    text-align: right; }
     .header .links .button-home, .header .links .uploadView-button {
       display: inline-block;
       padding: 40px 10px 0 0;
-      font-family: 'Permanent Marker', cursive; }
+      font-family: "Helvetica Nueue", sans-serif;
+      font-weight: 100; }
     .header .links .button-home:hover, .header .links .uploadView-button:hover {
       -webkit-text-stroke: 1px black;
       color: white; }
 
 .insta {
-  font-family: 'Yellowtail', cursive; }
+  font-family: 'Yellowtail', cursive;
+  color: #0B558A;
+  text-shadow: 1px 1px 1px grey; }
 
 .react {
-  font-family: 'Permanent Marker', cursive; }
+  font-family: 'Permanent Marker', cursive;
+  color: #0B558A;
+  text-shadow: 1px 1px 1px grey; }
+
+.logo:hover {
+  font-size: 3.2em; }
 
 ul {
   padding-left: 0; }
@@ -2066,6 +2083,52 @@ ul {
       height: 250px;
       margin-bottom: 20px;
       border: 1px solid grey; }
+
+.dash {
+  padding: 2em; }
+  .dash button {
+    color: #4090DB;
+    background: white;
+    padding: 11px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-color: #4090DB;
+    border-radius: 3px;
+    font-weight: 600;
+    border-width: 1px; }
+
+.profilePic {
+  height: 200px;
+  width: 200px;
+  border-radius: 200px;
+  margin-left: 20%;
+  border: 1px solid grey;
+  background-image: url("https://octodex.github.com/images/original.png");
+  background-size: cover;
+  display: inline-block; }
+
+.dashContent {
+  float: right;
+  width: 60%;
+  padding-right: 2em; }
+  .dashContent ul li {
+    display: inline-block;
+    padding-right: 1em; }
+
+#title {
+  font-family: "Helvetica Nueue", sans-serif;
+  font-weight: 200;
+  font-size: 2em; }
+
+.hashtag {
+  color: #4090DB;
+  transition: all .5s ease; }
+
+.hashtag:hover {
+  color: black; }
+
+.followers {
+  font-weight: bold; }
 
 .homePic:hover {
   border-bottom: 2px solid grey;
@@ -2091,8 +2154,45 @@ ul {
     .homeContainer .photoContainer:nth-child(4n+1) {
       clear: left; }
 
+.detailsContainer ul li {
+  padding: 1em;
+  display: block;
+  text-align: center;
+  font-family: "Helvetica Nueue", sans-serif;
+  font-weight: 100; }
+
+.detailsContainer button {
+  border-radius: 8px;
+  background: white; }
+
 .detail-img img {
-  max-width: 500px;
-  max-height: 700px; }
+  width: 500px;
+  max-height: 700px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid grey; }
+
+.uploadForm {
+  display: block;
+  padding: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px; }
+  .uploadForm button, .uploadForm input {
+    border-radius: 20px;
+    background: white;
+    font-weight: 100;
+    border-width: 1px;
+    margin-left: 2em; }
+
+.footer ul li {
+  display: inline-block;
+  padding: 1.2em;
+  font-family: "Helvetica Nueue", sans-serif;
+  font-weight: 100; }
+
+.footer ul a {
+  text-decoration: none; }
 
 /*# sourceMappingURL=main.css.map */

@@ -31,6 +31,8 @@ updateUrl(event) {
     return(
     <div className='editContainer'>
       <form>
+        <span>Enter new Url  </span>
+
         <input className="editUrl" onChange={this.updateUrl} type="url" value={this.state.Img}  placeholder="edit url here ..."/>
         <button className="editSaveBtn" onClick={this.saveHandler}>save</button>
       </form>

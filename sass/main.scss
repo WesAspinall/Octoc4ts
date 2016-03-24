@@ -2,26 +2,54 @@
 @import "neat";
 @import "font-awesome";
 
+
+
+$cool: "Helvetica Nueue", sans-serif;
+$shadow: 1px 1px 1px grey;
+$followButton: #4090DB;
+
+
 body {
-  @include outer-container;
   background: #FAFAFA;
+  width: 100%;
 }
 
+
+//Header 
+
 .header{
+  background: white;
   height:100px;
+  width: 100%;
+  padding: 0 6em;
 
   .logo{
     font-size: 3em;
     display: inline-block;
+    transition: all 1s ease;
+    -webkit-text-stroke: .5px black;
+    width: 33%;
+  }
+  .search{
+    width: 33%;
+    display: inline-block;
+    text-align: center;
+      input{
+        border-radius: 20px;
+        font-weight: 100;
+      }
   }
     .links{
       float: right;
       height: 80px;
       display: inline-block;
+      width: 33%;
+      text-align: right;
       .button-home, .uploadView-button{
         display: inline-block;
         padding: 40px 10px 0 0;
-        font-family: 'Permanent Marker', cursive;
+        font-family: $cool;
+        font-weight: 100;
       }
       .button-home:hover, .uploadView-button:hover{
         -webkit-text-stroke: 1px black;
@@ -31,9 +59,16 @@ body {
 }
 .insta{
   font-family: 'Yellowtail', cursive;
+  color: #0B558A;
+  text-shadow: $shadow;
 }
 .react{
   font-family: 'Permanent Marker', cursive;
+  color: #0B558A;
+  text-shadow: $shadow;
+}
+.logo:hover{
+  font-size: 3.2em;
 }
 
 ul{
@@ -48,6 +83,70 @@ ul{
         }
     } 
 }
+
+
+// dashboard
+
+.dash{
+  padding: 2em;
+    button{
+      color: $followButton;
+      background: white;
+      padding: 11px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-color: $followButton;
+      border-radius: 3px;
+      font-weight: 600;
+      border-width: 1px;
+    }
+}
+
+.profilePic{
+  height: 200px;
+  width: 200px;
+  border-radius: 200px;
+  margin-left: 20%;
+  border: 1px solid grey;
+  background-image: url("https://octodex.github.com/images/original.png");
+  background-size: cover;
+  display: inline-block;
+}
+
+.dashContent{
+  float: right;
+  width: 60%;
+  padding-right: 2em;
+    ul{
+      li{
+        display: inline-block;
+        padding-right: 1em;
+      }
+    }
+}
+
+#title{
+  font-family: $cool;
+  font-weight: 200;
+  font-size: 2em;
+}
+
+
+.hashtag{
+  color: $followButton;
+  transition: all .5s ease;
+}
+.hashtag:hover{
+  color: black;
+}
+
+.followers{
+  font-weight: bold;
+}
+
+
+//home page
+
 
 .homePic:hover{
  border-bottom: 2px solid grey;
@@ -64,9 +163,67 @@ ul{
   }
 }
 
+
+
+
+
+
+
 // Details View
 
+.detailsContainer{
+  ul li{
+
+    padding: 1em;
+    display: block;
+    text-align: center;
+    font-family: $cool;
+    font-weight: 100;
+  }
+  button{
+    border-radius: 8px;
+    background: white;
+  }
+}
+
 .detail-img img{
-  max-width: 500px;
+  width: 500px;
   max-height: 700px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid grey;
+}
+
+//Upload View
+
+.uploadForm{
+  display: block;
+  padding: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+
+    button, input{
+      border-radius: 20px;
+      background: white;
+      font-weight: 100;
+      border-width: 1px;
+      margin-left: 2em;
+    }
+
+}
+
+//footer
+
+.footer ul{
+  li{
+    display: inline-block;
+    padding: 1.2em;
+    font-family: $cool;
+    font-weight: 100;
+  }
+  a{
+    text-decoration: none;
+  }
 }

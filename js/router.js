@@ -14,7 +14,8 @@ import{
   HomeComponent,
   UploadComponent,
   EditComponent,
-  FooterComponent
+  FooterComponent,
+  DashboardComponent
 } from './views';
 
 export default Backbone.Router.extend({
@@ -58,6 +59,7 @@ export default Backbone.Router.extend({
         <HeaderComponent
         onUploadClick={()=>this.goto('upload')}
         onHomeClick={()=>this.goto('home')}/>
+        <DashboardComponent/>
         <HomeComponent
         onPhotoSelect ={(id) => 
         this.goto(`details/${id}`,{trigger: true})}
@@ -133,12 +135,16 @@ export default Backbone.Router.extend({
   edit(id) {
     let pizza = this.collection.get(id);
     this.render(
+      <wrap>
+      <HeaderComponent/>
       <EditComponent
         record={pizza.toJSON()}
         onBackClick={() => this.goto('details/' + id)}
         onSave={(Img) => this.saveForm(Img, id)}
       />
-    );
+      <FooterComponent/>
+      </wrap>
+    )
       
   },
 

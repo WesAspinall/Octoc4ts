@@ -18,7 +18,8 @@ export default React.createClass({
   render() {
     return(
 
-      <form>
+      <form className="uploadForm">
+      	<span> Upload Photo </span>
         <input className='uploadInput' onChange={this.updateUrl} placeholder='type url . . .'/>
         <button className='uploadSubmit' onClick={this.submitHandler}>Submit</button>
       </form>

@@ -7,8 +7,15 @@ export default React.createClass({
 
     <div className="footer">
       <ul>
-        <li>waspnx</li>
-        <li>photos from ____</li>
+        <li><a href="github.com/waspnx/instaReact">github repo</a></li>
+        <li>support</li>
+        <li>blog</li>
+        <li>press</li>
+        <li>api</li>
+        <li>jobs</li>
+        <li>privacy</li>
+        <li>terms</li>
+        <li>language</li>
       </ul>
     </div>
     

@@ -13,9 +13,12 @@ export default React.createClass({
       render() {
     return (
       <div className="header">
-      <div className="logo">
+      <div className="logo" onClick={this.goHome}>
         <span className="insta">insta</span>
         <span className="react">react</span>
+      </div>
+      <div className="search">
+        <input placeholder="search..."></input>
       </div>
       <div className="links">
         <div className="button-home" onClick={this.goHome}>Home</div>
