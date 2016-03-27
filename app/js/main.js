@@ -365,7 +365,11 @@ exports["default"] = _react2["default"].createClass({
     return _react2["default"].createElement(
       "div",
       { className: "dash" },
-      _react2["default"].createElement("div", { className: "profilePic" }),
+      _react2["default"].createElement(
+        "div",
+        { className: "profilePicContainer" },
+        _react2["default"].createElement("div", { className: "profilePic" })
+      ),
       _react2["default"].createElement(
         "div",
         { className: "dashContent" },
@@ -400,9 +404,18 @@ exports["default"] = _react2["default"].createClass({
           _react2["default"].createElement(
             "span",
             { className: "hashtag" },
-            "backbone"
+            "#backbone"
           ),
           "! Upload a photo by clicking \"upload\" in the top right corner."
+        ),
+        _react2["default"].createElement(
+          "p",
+          null,
+          _react2["default"].createElement(
+            "a",
+            { href: "http://www.github.com/waspnx/instaReact" },
+            "view github repo"
+          )
         ),
         _react2["default"].createElement(
           "ul",
@@ -581,7 +594,7 @@ exports["default"] = _react2["default"].createClass({
           null,
           _react2["default"].createElement(
             "a",
-            { href: "github.com/waspnx/instaReact" },
+            { href: "http://github.com/waspnx/instaReact" },
             "github repo"
           )
         ),

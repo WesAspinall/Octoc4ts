@@ -18,44 +18,49 @@ body {
 //Header 
 
 .header{
-  background: white;
+  background: #DCDCDC;
   height:100px;
   width: 100%;
   padding: 0 6em;
+  border-bottom: 2px solid black;
 
   .logo{
+    width: 100%;
     font-size: 3em;
     display: inline-block;
     transition: all 1s ease;
     -webkit-text-stroke: .5px black;
-    width: 33%;
+    text-align: center;
+    vertical-align: middle;
+
   }
   .search{
-    width: 33%;
+    width: 100%;
     display: inline-block;
     text-align: center;
       input{
         border-radius: 20px;
         font-weight: 100;
+        margin-left: 10px;
       }
   }
-    .links{
-      float: right;
-      height: 80px;
+  .links{
+    width: 100%;
+    padding-top: .5em;
+    margin: 0 auto;
+    display: inline-block;
+    text-align: center;
+    .button-home, .uploadView-button{
       display: inline-block;
-      width: 33%;
-      text-align: right;
-      .button-home, .uploadView-button{
-        display: inline-block;
-        padding: 40px 10px 0 0;
-        font-family: $cool;
-        font-weight: 100;
-      }
-      .button-home:hover, .uploadView-button:hover{
-        -webkit-text-stroke: 1px black;
-        color: white;
-      }
+      padding: 5px 20px 0 0;
+      font-family: $cool;
+      font-weight: 100;
     }
+    .button-home:hover, .uploadView-button:hover{
+      -webkit-text-stroke: 1px black;
+      color: white;
+    }
+  }
 }
 .insta{
   font-family: 'Yellowtail', cursive;
@@ -68,7 +73,7 @@ body {
   text-shadow: $shadow;
 }
 .logo:hover{
-  font-size: 3.2em;
+  cursor: pointer;
 }
 
 ul{
@@ -88,7 +93,9 @@ ul{
 // dashboard
 
 .dash{
+  @include outer-container;
   padding: 2em;
+  border-bottom: 1px solid grey;
     button{
       color: $followButton;
       background: white;
@@ -102,25 +109,31 @@ ul{
     }
 }
 
-.profilePic{
-  height: 200px;
-  width: 200px;
-  border-radius: 200px;
-  margin-left: 20%;
-  border: 1px solid grey;
-  background-image: url("https://octodex.github.com/images/original.png");
-  background-size: cover;
-  display: inline-block;
+
+.profilePicContainer{
+  width: 100%;
+  text-align: center;
+  .profilePic{
+    text-align: center;
+    height: 200px;
+    width: 200px;
+    margin: 0 20%;
+    border-radius: 200px;
+    border: 1px solid grey;
+    background-image: url("https://octodex.github.com/images/original.png");
+    background-size: cover;
+    display: inline-block;
+  }
 }
 
 .dashContent{
-  float: right;
-  width: 60%;
-  padding-right: 2em;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
     ul{
       li{
         display: inline-block;
-        padding-right: 1em;
+      
       }
     }
 }
@@ -129,6 +142,7 @@ ul{
   font-family: $cool;
   font-weight: 200;
   font-size: 2em;
+  padding-right: 10px;
 }
 
 
@@ -140,13 +154,13 @@ ul{
   color: black;
 }
 
-.followers{
+.followers li{
   font-weight: bold;
+  padding-right: 1em;
 }
 
 
 //home page
-
 
 .homePic:hover{
  border-bottom: 2px solid grey;
@@ -155,17 +169,16 @@ ul{
 
 
 .homeContainer{
-  @include outer-container
+ // @include outer-container;
   .photoContainer{
-    @include span-columns(3);
-    @include omega(4n);
-
+    // @include span-columns(3);
+    // @include omega(4n);
+    padding: 1em;
+      li{
+        text-align: center;
+      }
   }
 }
-
-
-
-
 
 
 
@@ -227,3 +240,87 @@ ul{
     text-decoration: none;
   }
 }
+
+
+/////////////////////////
+//Breakpoints///////////
+///////////////////////
+
+
+@media only screen and (min-width : 650px) and (max-width : 980px) {
+
+  .profilePicContainer{
+    @include span-columns(4);
+    float: left;
+  }
+
+  .dashContent{
+    @include span-columns(8);
+    float: right;
+    padding-left: 100px;
+  }
+
+
+    .homeContainer{
+   @include outer-container;
+    .photoContainer{
+      @include span-columns(5); 
+      padding-left: 1em;  
+        li{
+          text-align: center;
+        }
+    }
+  }
+
+}
+
+
+@media only screen and (min-width : 981px) and (max-width : 1500px) {
+
+  .profilePicContainer{
+    @include span-columns(4);
+    float: left;
+  }
+
+  .dashContent{
+    @include span-columns(8);
+    float: right;
+    padding-left: 100px;
+  }
+
+  .homeContainer{
+   @include outer-container;
+    .photoContainer{
+      @include span-columns(3);
+      @include omega(4n);
+      padding: 1em;
+        li{
+          text-align: center;
+        }
+    }
+  }
+
+  .header{
+
+    .logo{
+      @include span-columns(4);
+      display: inline-block;
+      margin: 0;
+      
+    }
+    .search{
+      @include span-columns(4);
+      padding-top: 30px;
+      text-align: right;
+
+    }
+    .links{
+      @include span-columns(4);
+      display: inline-block;
+      margin: 0;
+      padding-top: 30px;
+     text-align: right;
+    }
+  }
+}
+

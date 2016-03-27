@@ -7,7 +7,7 @@ export default React.createClass({
 
     <div className="footer">
       <ul>
-        <li><a href="github.com/waspnx/instaReact">github repo</a></li>
+        <li><a href="http://github.com/waspnx/instaReact">github repo</a></li>
         <li>support</li>
         <li>blog</li>
         <li>press</li>
